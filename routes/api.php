@@ -8,5 +8,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('company', [\App\Http\Controllers\API\CompanyController::class, 'index']);
-Route::get('employee', [\App\Http\Controllers\API\EmployeeController::class, 'index']);
+Route::group(['namespace' => 'API', 'middleware' => 'auth:sanctum'], function () {
+
+    Route::get('me', 'AuthController@me');
+
+    Route::apiResource('user', 'UserController');
+    Route::apiResource('company', 'CompanyController');
+    Route::apiResource('employee', 'EmployeeController');
+
+    Route::post('logout', 'AuthController@logout');
+
+});
+
+Route::group(['namespace' => 'API'], function () {
+
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+
+});
+
+
+

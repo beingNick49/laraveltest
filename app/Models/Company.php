@@ -12,9 +12,11 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable = [
+        'logo',
         'name',
         'email',
-        'logo',
-        'website'
+        'phone',
+        'website',
+        'status',
     ];
 }

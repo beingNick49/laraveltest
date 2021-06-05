@@ -15,8 +15,8 @@ class UserController extends Controller
     public function index()
     {
         $data = [];
-        $data['users'] = User::where('id', '!=', auth()->user()->id)
-            ->latest()
+        $data['users'] = User::latest()
+            ->hideLoggedInUser()
             ->paginate(10);
 
         return view($this->viewPath . 'index', compact('data'));
