@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
         $data = [];
         $data['users'] = User::latest()
             ->hideLoggedInUser()
-            ->paginate(10);
+            ->take(5)
+            ->get();
 
         return view($this->viewPath . 'index', compact('data'));
     }
@@ -32,6 +34,7 @@ class UserController extends Controller
 
     public function store(StoreRequest $request)
     {
+        $request->merge(['password'=>Hash::make($request->get('password'))]);
         User::create($request->data());
 
         return redirect()->route($this->baseRoute);
@@ -49,6 +52,7 @@ class UserController extends Controller
 
     public function update(UpdateRequest $request, User $user)
     {
+        $request->merge(['password'=>Hash::make($request->get('password'))]);
         $user->update($request->data());
 
         return redirect()->route($this->baseRoute);
@@ -57,6 +61,13 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        return redirect()->route($this->baseRoute);
+    }
+
+    public function status(User $user)
+    {
+        $user->update(['status' => !$user->status]);
 
         return redirect()->route($this->baseRoute);
     }

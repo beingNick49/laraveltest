@@ -19,6 +19,7 @@
                                 <th>Logo</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Phone</th>
                                 <th>Website</th>
                                 <th>Action</th>
                             </tr>
@@ -31,13 +32,14 @@
                                         <td>
                                             @if(isset($company->logo))
                                                 <img src="{{ asset('uploads/images/company/'.$company->logo) }}"
-                                                     width="100">
+                                                     width="75">
                                             @else
                                                 <p>N/A</p>
                                             @endif
                                         </td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->email }}</td>
+                                        <td>{{ $company->phone }}</td>
                                         <td>{{ $company->website }}</td>
                                         <td>
                                             <div class="actionButtons">

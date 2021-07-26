@@ -12,6 +12,12 @@ class CompanyController extends Controller
 {
     protected $viewPath = 'backend.company.';
     protected $baseRoute = 'company.index';
+    protected $folderPath;
+
+    public function __construct()
+    {
+        $this->folderPath = storage_path('app/public/uploads/images/company/');
+    }
 
     public function index()
     {
@@ -33,8 +39,8 @@ class CompanyController extends Controller
     {
         if ($request->has('main_logo')) {
             $file = $request->file('main_logo');
-            $fileName = Str::random(25) . ' - ' . $file->getClientOriginalName();
-            $file->move(storage_path('app/public/uploads/images/company/'), $fileName);
+            $fileName = Str::random(25) . '.' . $file->getClientOriginalExtension();
+            $file->move($this->folderPath, $fileName);
             $request->merge(['logo' => $fileName]);
         }
         Company::create($request->all());
@@ -58,13 +64,13 @@ class CompanyController extends Controller
 
         if ($request->has('main_logo')) {
             $file = $request->file('main_logo');
-            $fileName = Str::random(25) . ' - ' . $file->getClientOriginalName();
-            $file->move(storage_path('app/public/uploads/images/company/'), $fileName);
+            $fileName = Str::random(25) . '.' . $file->getClientOriginalExtension();
+            $file->move($this->folderPath, $fileName);
             $request->merge(['logo' => $fileName]);
 
             if ($company->logo) {
-                if (file_exists(storage_path('app/public/uploads/images/company/') . $company->logo)) {
-                    unlink(storage_path('app/public/uploads/images/company/') . $company->logo);
+                if (file_exists($this->folderPath . $company->logo)) {
+                    unlink($this->folderPath . $company->logo);
                 }
             }
         }
@@ -78,8 +84,8 @@ class CompanyController extends Controller
         $company->delete();
 
         if ($company->logo) {
-            if (file_exists(storage_path('app/public/uploads/images/company/') . $company->logo)) {
-                unlink(storage_path('app/public/uploads/images/company/') . $company->logo);
+            if (file_exists($this->folderPath . $company->logo)) {
+                unlink($this->folderPath . $company->logo);
             }
         }
 

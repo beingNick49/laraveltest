@@ -9,10 +9,11 @@ class StoreRequest extends BaseRequest
     public function rules()
     {
         return [
+            'main_logo' => ['max:2048', 'mimes:png,jpeg,gif'],
             'name' => ['required', 'min:3', 'max:250'],
-            'email' => ['max:100'],
-            'main_logo' => ['max:2048', 'mimes:png,jpeg,gif', 'dimensions:min_width=100,min_height=100'],
-            'website' => ['max:100'],
+            'email' => ['required', 'max:100'],
+            'phone' => ['required', 'max:20'],
+            'website' => ['required', 'max:100'],
         ];
     }
 }

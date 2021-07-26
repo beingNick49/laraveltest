@@ -19,6 +19,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -29,6 +30,15 @@
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>
+                                            <a href="{{ route('user.status',$user->id) }}">
+                                                @if($user->status)
+                                                    <button class="btn btn-sm btn-primary">ACTIVE</button>
+                                                @else
+                                                    <button class="btn btn-sm btn-warning">INACTIVE</button>
+                                                @endif
+                                            </a>
+                                        </td>
                                         <td>
                                             <div class="actionButtons">
                                                 <a href="{{ route('user.edit',$user->id) }}"
@@ -53,7 +63,6 @@
                             @endif
                             </tbody>
                         </table>
-                        {{ $data['users']->links() }}
                     </div>
                 </div>
             </div>

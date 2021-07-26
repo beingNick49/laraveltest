@@ -12,7 +12,6 @@
 <div class="form-group">
     <label for="main_logo"><strong>Logo</strong></label>
     {!! Form::file('main_logo', ['placeholder' => 'Logo', 'class' => 'form-control']) !!}
-    <p style="color: red"><strong>Max. size : 2MB, Min. dimension:100x100</strong></p>
     @error('main_logo')
     <span class="error-messages" role="alert">
         <strong>{{ $message }}</strong>
@@ -34,6 +33,16 @@
     <label for="email"><strong>Email</strong></label>
     {!! Form::email('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
     @error('email')
+    <span class="error-messages" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+</div>
+
+<div class="form-group">
+    <label for="phone"><strong>Phone</strong></label>
+    {!! Form::number('phone', null, ['placeholder' => 'Phone', 'class' => 'form-control']) !!}
+    @error('phone')
     <span class="error-messages" role="alert">
         <strong>{{ $message }}</strong>
     </span>
