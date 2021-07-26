@@ -22,6 +22,7 @@ class StoreRequest extends BaseRequest
         return [
             'company_id' => $this->input('company_id'),
             'first_name' => $this->input('first_name'),
+            'middle_name' => $this->input('middle_name'),
             'last_name' => $this->input('last_name'),
             'email' => $this->input('email'),
             'phone' => $this->input('phone'),

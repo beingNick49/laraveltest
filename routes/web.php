@@ -9,6 +9,8 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth']], function () {
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
 
+    Route::get('users', [\App\Http\Controllers\Backend\UserController::class, 'users']);
+
     Route::resource('user', 'UserController');
     Route::get('user/{user}/status', 'UserController@status')->name('user.status');
 

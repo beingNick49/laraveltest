@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\CompaniesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\StoreRequest;
 use App\Http\Requests\Company\UpdateRequest;
@@ -19,12 +20,9 @@ class CompanyController extends Controller
         $this->folderPath = storage_path('app/public/uploads/images/company/');
     }
 
-    public function index()
+    public function index(CompaniesDataTable $companiesDataTable)
     {
-        $data = [];
-        $data['companies'] = Company::latest()->paginate(10);
-
-        return view($this->viewPath . 'index', compact('data'));
+        return $companiesDataTable->render($this->viewPath . 'index');
     }
 
     public function create()

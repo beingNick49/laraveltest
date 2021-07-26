@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
@@ -13,15 +14,9 @@ class UserController extends Controller
     protected $viewPath = 'backend.user.';
     protected $baseRoute = 'user.index';
 
-    public function index()
+    public function index(UsersDataTable $usersDataTable)
     {
-        $data = [];
-        $data['users'] = User::latest()
-            ->hideLoggedInUser()
-            ->take(5)
-            ->get();
-
-        return view($this->viewPath . 'index', compact('data'));
+        return $usersDataTable->render($this->viewPath . 'index');
     }
 
     public function create()
@@ -34,7 +29,7 @@ class UserController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $request->merge(['password'=>Hash::make($request->get('password'))]);
+        $request->merge(['password' => Hash::make($request->get('password'))]);
         User::create($request->data());
 
         return redirect()->route($this->baseRoute);
@@ -52,7 +47,7 @@ class UserController extends Controller
 
     public function update(UpdateRequest $request, User $user)
     {
-        $request->merge(['password'=>Hash::make($request->get('password'))]);
+        $request->merge(['password' => Hash::make($request->get('password'))]);
         $user->update($request->data());
 
         return redirect()->route($this->baseRoute);

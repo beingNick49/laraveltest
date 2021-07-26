@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\EmployeesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\StoreRequest;
 use App\Http\Requests\Employee\UpdateRequest;
@@ -13,12 +14,9 @@ class EmployeeController extends Controller
     protected $viewPath = 'backend.employee.';
     protected $baseRoute = 'employee.index';
 
-    public function index()
+    public function index(EmployeesDataTable $employeesDataTable)
     {
-        $data = [];
-        $data['employees'] = Employee::latest()->paginate(10);
-
-        return view($this->viewPath . 'index', compact('data'));
+        return $employeesDataTable->render($this->viewPath . 'index');
     }
 
     public function create()

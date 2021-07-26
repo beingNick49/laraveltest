@@ -19,6 +19,16 @@
 </div>
 
 <div class="form-group">
+    <label for="middle_name"><strong>Middle name</strong></label>
+    {!! Form::text('middle_name', null, ['placeholder' => 'Middle name', 'class' => 'form-control']) !!}
+    @error('middle_name')
+    <span class="error-messages" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+</div>
+
+<div class="form-group">
     <label for="last_name"><strong>Last name</strong></label>
     {!! Form::text('last_name', null, ['placeholder' => 'Last name', 'class' => 'form-control', 'required']) !!}
     @error('last_name')

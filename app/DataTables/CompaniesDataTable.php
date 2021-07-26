@@ -2,12 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Company;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class CompaniesDataTable extends DataTable
 {
     public function dataTable($query)
     {
@@ -17,11 +17,11 @@ class UsersDataTable extends DataTable
                 return $row->status ? "Active" : "In-Active";
             })
             ->addColumn('action', function ($row) {
-                return view('shared.action_button', ['panel' => 'user', 'id' => $row->id]);
+                return view('shared.action_button', ['panel' => 'company', 'id' => $row->id]);
             });
     }
 
-    public function query(User $model)
+    public function query(Company $model)
     {
         return $model->newQuery();
     }
@@ -29,7 +29,7 @@ class UsersDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('users-table')
+            ->setTableId('companies-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -45,6 +45,8 @@ class UsersDataTable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('email'),
+            Column::make('phone'),
+            Column::make('website'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
