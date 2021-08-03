@@ -21,6 +21,7 @@ class UpdateRequest extends BaseRequest
             'name' => $this->input('name'),
             'email' => $this->input('email'),
             'password' => $this->input('password'),
+            'status' => $this->input('status'),
         ];
     }
 }

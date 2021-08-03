@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Backend;
 
 use App\DataTables\CompaniesDataTable;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\StoreRequest;
 use App\Http\Requests\Company\UpdateRequest;
 use App\Models\Company;
 use Illuminate\Support\Str;
 
-class CompanyController extends Controller
+class CompanyController extends BaseController
 {
-    protected $viewPath = 'backend.company.';
-    protected $baseRoute = 'company.index';
+    protected $view_path = 'backend.company.';
+    protected $base_route = 'company.index';
+    protected $panel = 'Company';
     protected $folderPath;
 
     public function __construct()
@@ -22,7 +22,7 @@ class CompanyController extends Controller
 
     public function index(CompaniesDataTable $companiesDataTable)
     {
-        return $companiesDataTable->render($this->viewPath . 'index');
+        return $companiesDataTable->render(parent::loadDataToView($this->view_path . 'index'));
     }
 
     public function create()
@@ -30,7 +30,7 @@ class CompanyController extends Controller
         $data = [];
         $data['model'] = new Company();
 
-        return view($this->viewPath . 'create', compact('data'));
+        return view(parent::loadDataToView($this->view_path . 'create'), compact('data'));
     }
 
     public function store(StoreRequest $request)
@@ -42,19 +42,19 @@ class CompanyController extends Controller
             $request->merge(['logo' => $fileName]);
         }
         Company::create($request->all());
+        toast($this->panel . ' created successfully !!', 'success');
 
-
-        return redirect()->route($this->baseRoute);
+        return redirect()->route($this->base_route);
     }
 
     public function show(Company $company)
     {
-        return view($this->viewPath . 'show', ['company' => $company]);
+        return view(parent::loadDataToView($this->view_path . 'show'), ['company' => $company]);
     }
 
     public function edit(Company $company)
     {
-        return view($this->viewPath . 'edit', ['company' => $company]);
+        return view(parent::loadDataToView($this->view_path . 'edit'), ['company' => $company]);
     }
 
     public function update(UpdateRequest $request, Company $company)
@@ -73,20 +73,26 @@ class CompanyController extends Controller
             }
         }
         $company->update($request->all());
+        toast($this->panel . ' updated successfully !!', 'success');
 
-        return redirect()->route($this->baseRoute);
+        return redirect()->route($this->base_route);
     }
 
     public function destroy(Company $company)
     {
-        $company->delete();
+        try {
+            $company->delete();
 
-        if ($company->logo) {
-            if (file_exists($this->folderPath . $company->logo)) {
-                unlink($this->folderPath . $company->logo);
+            if ($company->logo) {
+                if (file_exists($this->folderPath . $company->logo)) {
+                    unlink($this->folderPath . $company->logo);
+                }
             }
+            toast($this->panel . ' deleted successfully !!', 'success');
+        } catch (\Throwable $exception) {
+            toast($exception->getMessage(), 'error');
         }
 
-        return redirect()->route($this->baseRoute);
+        return redirect()->route($this->base_route);
     }
 }

@@ -26,6 +26,7 @@ class StoreRequest extends BaseRequest
             'last_name' => $this->input('last_name'),
             'email' => $this->input('email'),
             'phone' => $this->input('phone'),
+            'status' => $this->input('status'),
         ];
     }
 }

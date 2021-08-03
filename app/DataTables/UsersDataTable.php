@@ -13,6 +13,7 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addIndexColumn()
             ->addColumn('status', function ($row) {
                 return $row->status ? "Active" : "In-Active";
             })
@@ -42,7 +43,8 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::computed('DT_RowIndex')
+                ->title('S.N'),
             Column::make('name'),
             Column::make('email'),
             Column::make('status'),

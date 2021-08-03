@@ -58,3 +58,13 @@
     </span>
     @enderror
 </div>
+
+<div class="form-group">
+    <label for="status"><strong>Select status</strong></label>
+    {!! Form::select('status', [1 => 'Active', 0 => 'In-Active'], null, ['class' => 'form-control']) !!}
+    @error('status')
+    <span class="error-messages" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+</div>

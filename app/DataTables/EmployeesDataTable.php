@@ -13,6 +13,10 @@ class EmployeesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addIndexColumn()
+            ->addColumn('company', function ($row) {
+                return $row->company->name;
+            })
             ->addColumn('name', function ($row) {
                 if ($row->middle_name) {
                     return $row->first_name . ' ' . $row->middle_name . ' ' . $row->last_name;
@@ -29,7 +33,7 @@ class EmployeesDataTable extends DataTable
 
     public function query(Employee $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('company');
     }
 
     public function html()
@@ -48,8 +52,10 @@ class EmployeesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::computed('DT_RowIndex')
+                ->title('S.N'),
             Column::make('name'),
+            Column::make('company'),
             Column::make('email'),
             Column::make('phone'),
             Column::make('status'),
@@ -63,6 +69,6 @@ class EmployeesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Employees_' . date('YmdHis');
     }
 }

@@ -13,6 +13,7 @@ class CompaniesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addIndexColumn()
             ->addColumn('status', function ($row) {
                 return $row->status ? "Active" : "In-Active";
             })
@@ -42,7 +43,8 @@ class CompaniesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::computed('DT_RowIndex')
+                ->title('S.N'),
             Column::make('name'),
             Column::make('email'),
             Column::make('phone'),
@@ -58,6 +60,6 @@ class CompaniesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Companies_' . date('YmdHis');
     }
 }

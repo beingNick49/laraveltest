@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::take(5)->get();
 
         return UserResource::collection($users);
     }
