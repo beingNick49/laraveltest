@@ -14,4 +14,11 @@ class UserController extends Controller
 
         return UserResource::collection($users);
     }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return "deleted";
+    }
 }

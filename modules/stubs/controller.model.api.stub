@@ -1,0 +1,43 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class {{ class }} extends Controller
+{
+    protected $base_route = {{ class }};
+    protected $view_path = 'Backend::{{ class }}.views';
+    protected $panel = {{ class }};
+    protected $folder = {{ class }};
+    private ${{ class }};
+    private ${{ class }}Service;
+    private $messageService;
+
+    public function index()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show({{ model }} ${{ modelVariable }})
+    {
+        //
+    }
+
+    public function update(Request $request, {{ model }} ${{ modelVariable }})
+    {
+        //
+    }
+
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+        //
+    }
+}
