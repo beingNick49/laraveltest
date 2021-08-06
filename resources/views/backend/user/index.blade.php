@@ -1,4 +1,4 @@
-@extends('backend.layouts.app')
+@extends('backend.shared.master')
 
 @section('css')
     @include('shared.css_datatable')
