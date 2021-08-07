@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('backend.shared.head')
+@include('backend.common.head')
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
     <!-- Navbar -->
-@include('backend.shared.navbar')
+@include('backend.common.navbar')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('backend.shared.sidebar')
+@include('backend.common.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -18,7 +18,7 @@
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    @include('backend.shared.footer')
+    @include('backend.common.footer')
 </div>
 <!-- ./wrapper -->
 

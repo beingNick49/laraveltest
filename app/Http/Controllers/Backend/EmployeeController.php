@@ -11,7 +11,7 @@ use App\Models\Employee;
 class EmployeeController extends BaseController
 {
     protected $view_path = 'backend.employee.';
-    protected $base_route = 'employee.index';
+    protected $base_route = 'employee';
     protected $panel = 'Employee';
 
     public function index(EmployeesDataTable $employeesDataTable)
@@ -33,7 +33,7 @@ class EmployeeController extends BaseController
         Employee::create($request->data());
         toast($this->panel . ' created successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 
     public function show(Employee $employee)
@@ -54,7 +54,7 @@ class EmployeeController extends BaseController
         $employee->update($request->data());
         toast($this->panel . ' updated successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 
     public function destroy(Employee $employee)
@@ -62,6 +62,6 @@ class EmployeeController extends BaseController
         $employee->delete();
         toast($this->panel . ' deleted successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 }

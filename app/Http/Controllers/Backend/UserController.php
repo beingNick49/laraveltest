@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends BaseController
 {
     protected $view_path = 'backend.user.';
-    protected $base_route = 'user.index';
+    protected $base_route = 'user';
     protected $panel = 'User';
 
     public function index(UsersDataTable $usersDataTable)
@@ -33,7 +33,7 @@ class UserController extends BaseController
         User::create($request->data());
         toast($this->panel . ' created successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 
     public function show(User $user)
@@ -52,7 +52,7 @@ class UserController extends BaseController
         $user->update($request->data());
         toast($this->panel . ' updated successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 
     public function destroy(User $user)
@@ -60,7 +60,7 @@ class UserController extends BaseController
         $user->delete();
         toast($this->panel . ' deleted successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 
     public function status(User $user)
@@ -68,6 +68,6 @@ class UserController extends BaseController
         $user->update(['status' => !$user->status]);
         toast($this->panel . ' status changed successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 }

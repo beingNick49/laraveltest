@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class CompanyController extends BaseController
 {
     protected $view_path = 'backend.company.';
-    protected $base_route = 'company.index';
+    protected $base_route = 'company';
     protected $panel = 'Company';
     protected $folderPath;
 
@@ -44,7 +44,7 @@ class CompanyController extends BaseController
         Company::create($request->all());
         toast($this->panel . ' created successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 
     public function show(Company $company)
@@ -75,7 +75,7 @@ class CompanyController extends BaseController
         $company->update($request->all());
         toast($this->panel . ' updated successfully !!', 'success');
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 
     public function destroy(Company $company)
@@ -90,9 +90,9 @@ class CompanyController extends BaseController
             }
             toast($this->panel . ' deleted successfully !!', 'success');
         } catch (\Throwable $exception) {
-            toast($exception->getMessage(), 'error');
+            toast('you are not allowed to delete this company', 'error');
         }
 
-        return redirect()->route($this->base_route);
+        return redirect()->route($this->base_route . '.index');
     }
 }

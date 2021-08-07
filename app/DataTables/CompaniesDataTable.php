@@ -14,12 +14,19 @@ class CompaniesDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
+            ->addColumn('logo', function ($row) {
+                if ($row->logo) {
+                    return '<img src="' . asset('storage/uploads/images/company/' . $row->logo) . '" width="50">';
+                }
+                return 'N/A';
+            })
             ->addColumn('status', function ($row) {
                 return $row->status ? "Active" : "In-Active";
             })
             ->addColumn('action', function ($row) {
                 return view('shared.action_button', ['panel' => 'company', 'id' => $row->id]);
-            });
+            })
+            ->rawColumns(['logo']);
     }
 
     public function query(Company $model)
@@ -45,6 +52,7 @@ class CompaniesDataTable extends DataTable
         return [
             Column::computed('DT_RowIndex')
                 ->title('S.N'),
+            Column::make('logo'),
             Column::make('name'),
             Column::make('email'),
             Column::make('phone'),

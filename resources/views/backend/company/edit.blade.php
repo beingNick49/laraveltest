@@ -1,4 +1,4 @@
-@extends('backend.shared.master')
+@extends('backend.common.master')
 @section('content')
 
     <!-- Content Header (Page header) -->
@@ -10,8 +10,9 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">{{ $panel }} Manager</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route($base_route.'.index') }}">{{ $panel }}</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -24,9 +25,9 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    {!! Form::model($company, ['route' => ['company.update', $company->id], 'method' => 'PATCH','enctype'=>'multipart/form-data']) !!}
+                    {!! Form::model($company, ['route' => [$base_route.'.update', $company->id], 'method' => 'PATCH','enctype'=>'multipart/form-data']) !!}
                     @csrf
-                    @include('backend.company.includes.form')
+                    @include($view_path.'.includes.form')
                     <div class="text-center card-footer">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Update</button>
                     </div>
