@@ -15,7 +15,8 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.index') }}" class="nav-link">
+                    <a href="{{ route('dashboard.index') }}"
+                        {!! request()->is('dashboard*')?'class="nav-link active"':'class="nav-link"' !!}>
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Dashboard
@@ -23,7 +24,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('user.index') }}" class="nav-link">
+                    <a href="{{ route('user.index') }}"
+                        {!! request()->is('user*')?'class="nav-link active"':'class="nav-link"' !!}>
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             User
@@ -31,7 +33,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('company.index') }}" class="nav-link">
+                    <a href="{{ route('company.index') }}"
+                        {!! request()->is('company*')?'class="nav-link active"':'class="nav-link"' !!}>
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Company
@@ -39,7 +42,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('employee.index') }}" class="nav-link">
+                    <a href="{{ route('employee.index') }}"
+                        {!! request()->is('employee*')?'class="nav-link active"':'class="nav-link"' !!}>
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Employee

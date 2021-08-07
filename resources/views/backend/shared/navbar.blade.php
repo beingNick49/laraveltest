@@ -11,20 +11,20 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                {{ auth()->user()->name }}
+                <strong>{{ auth()->user()->name }}</strong>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="{{ route('profile.index') }}" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> Profile
+                    <i class="fas fa-user mr-2"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('password.index') }}" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> Password
+                    <i class="fas fa-lock mr-2"></i> Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-file mr-2"></i> Logout
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf

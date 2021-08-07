@@ -1,9 +1,9 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-        Anything you want
+        All rights reserved.
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; {{ now()->format('Y') }} <a
-            href="https://adminlte.io">{{ config('app.name') }}</a>.</strong> All rights reserved.
+            href="https://adminlte.io">{{ config('app.name') }}</a>.</strong>
 </footer>
