@@ -1,7 +1,7 @@
 @extends('backend.common.master')
 
 @section('css')
-    @include('shared.css_datatable')
+    @include('backend.common.css_datatable')
 @endsection
 
 @section('content')
@@ -39,5 +39,5 @@
 @endsection
 
 @section('js')
-    @include('shared.js_datatable')
+    @include('backend.common.js_datatable')
 @endsection

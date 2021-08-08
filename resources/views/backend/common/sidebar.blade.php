@@ -17,7 +17,7 @@
                 <li class="nav-item">
                     <a href="{{ route('dashboard.index') }}"
                         {!! request()->is('dashboard*')?'class="nav-link active"':'class="nav-link"' !!}>
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
                         </p>
@@ -26,7 +26,7 @@
                 <li class="nav-item">
                     <a href="{{ route('user.index') }}"
                         {!! request()->is('user*')?'class="nav-link active"':'class="nav-link"' !!}>
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
                             User
                         </p>
@@ -35,7 +35,7 @@
                 <li class="nav-item">
                     <a href="{{ route('company.index') }}"
                         {!! request()->is('company*')?'class="nav-link active"':'class="nav-link"' !!}>
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-building"></i>
                         <p>
                             Company
                         </p>
@@ -44,7 +44,7 @@
                 <li class="nav-item">
                     <a href="{{ route('employee.index') }}"
                         {!! request()->is('employee*')?'class="nav-link active"':'class="nav-link"' !!}>
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Employee
                         </p>

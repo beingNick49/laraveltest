@@ -27,7 +27,7 @@ class EmployeesDataTable extends DataTable
                 return $row->status ? "Active" : "In-Active";
             })
             ->addColumn('action', function ($row) {
-                return view('shared.action_button', ['panel' => 'employee', 'id' => $row->id]);
+                return view('backend.common.action_button', ['panel' => 'employee', 'id' => $row->id]);
             });
     }
 
