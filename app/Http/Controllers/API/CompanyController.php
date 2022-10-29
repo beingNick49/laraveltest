@@ -10,7 +10,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::with('employees')->withCount('employees')->get();
 
         return CompanyResource::collection($companies);
     }

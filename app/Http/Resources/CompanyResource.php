@@ -13,6 +13,8 @@ class CompanyResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'website' => $this->website,
+            // 'employees_count' => $this->employees_count,
+            // 'employees' => CompanyEmployeeResource::collection($this->employees),
         ];
     }
 }
