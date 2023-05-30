@@ -14,7 +14,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'API', 'middleware' => 'auth:sanctum'], function () {
 
-    Route::get('me', 'AuthController@me');
+    Route::get('profile', [AuthController::class, 'profile']);
 
     Route::apiResource('user', UserController::class);
     Route::apiResource('company', CompanyController::class);
