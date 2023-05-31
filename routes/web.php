@@ -20,12 +20,14 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth']], function () {
     Route::resource('employee', EmployeeController::class);
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::post('profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('password', [PasswordController::class, 'index'])->name('password.index');
-    Route::post('password/{id}', [PasswordController::class, 'update'])->name('password.update');
+    Route::post('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::get('user/{user}/status', [UserController::class, 'status'])->name('user.status');
+    Route::get('company/{company}/status', [CompanyController::class, 'status'])->name('company.status');
+    Route::get('employee/{employee}/status', [EmployeeController::class, 'status'])->name('employee.status');
 });
 
 Auth::routes(['register' => false]);
