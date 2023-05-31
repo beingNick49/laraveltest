@@ -2,48 +2,36 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register()
+    public function register(RegisterRequest $request)
     {
-        $validatedData = request()->validate([
-            'name' => 'required|string|max:250',
-            'email' => 'required|string|email|unique:users|max:250',
-            'password' => 'required|string|min:6|max:250',
-        ]);
-
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
-
-        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'user' => $user,
-            'token' => $token,
         ]);
     }
 
-    public function login()
+    public function login(LoginRequest $request)
     {
-        $validatedData = request()->validate([
-            'email' => 'required|string|email|max:250',
-            'password' => 'required|string|min:6|max:250',
-        ]);
-
         if (!auth()->attempt(request()->only('email', 'password'))) {
             return response()->json([
                 'message' => 'These credentials do not match our records.'
             ], 401);
         }
 
-        $user = User::where('email', $validatedData['email'])->firstOrFail();
+        $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
